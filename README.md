@@ -13,6 +13,7 @@ This repo is the MMVLab's official codebase for the solution of [Light My Cells:
 - [torch-em](https://github.com/constantinpape/torch-em): 0.6.1
 - timm: 0.4.12
 - mae: please refer [here](https://github.com/facebookresearch/mae).
+- [lion-pytorch](https://github.com/lucidrains/lion-pytorch): 0.1.4
 
 ## How to use
 
