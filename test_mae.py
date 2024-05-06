@@ -57,14 +57,6 @@ save_path.mkdir(exist_ok=True, parents=True)
 checkpoint_path = Path(args.checkpoint_path)
 assert checkpoint_path.exists(), f"{checkpoint_path} doesn't exist!"
 device = torch.device(args.device)
-# unetr = UNETR(
-#     backbone="sam",
-#     encoder="vit_b",
-#     out_channels=1,
-#     use_sam_stats=True,
-#     final_activation=None,
-#     use_skip_connection=True,
-# )
 
 unetr = UNETR(
     img_size=args.img_size,

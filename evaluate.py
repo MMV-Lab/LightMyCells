@@ -15,25 +15,7 @@ from skimage.metrics import structural_similarity as ssim
 from skimage.metrics import peak_signal_noise_ratio as psnr
 from skimage.metrics import mean_squared_error as mse
 
-
 from utils import AverageMeter
-
-
-def refer_based_normalize(image: np.array, refer: np.array):
-    """a wrapper of monai.transforms.ReferenceBasedNormalizeIntensity
-
-    Args:
-        image (np.array): input image
-        refer (np.array): refer image
-    """
-    img = image.astype(np.float32)
-    img = torch.from_numpy(img)
-    refer = refer.astype(np.float32)
-    refer = torch.from_numpy(refer)
-    normalize_intensity = monai.transforms.ReferenceBasedNormalizeIntensityd()
-    img_normalized = normalize_intensity({"image": img, "target": refer})["image"]
-    return img_normalized.numpy()
-
 
 def normalize(image: np.array):
     img = image.astype(np.float32)

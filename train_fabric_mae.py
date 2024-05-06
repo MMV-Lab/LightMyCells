@@ -223,7 +223,6 @@ train_loader = DataLoader(
     batch_size=FLAGS.batch_size,
     pin_memory=True,
     drop_last=True,
-    # collate_fn=collate_fn,
 )
 val_loader = DataLoader(
     valset,
@@ -232,7 +231,6 @@ val_loader = DataLoader(
     batch_size=FLAGS.batch_size,
     pin_memory=True,
     drop_last=True,
-    # collate_fn=collate_fn,
 )
 
 train_loader, val_loader = fabric.setup_dataloaders(train_loader, val_loader)
