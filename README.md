@@ -6,20 +6,38 @@ This repo is the MMVLab's official codebase for the solution of [Light My Cells:
 
 ## Installation
 
-### Dependency
-- torch: 2.2.0+cu11x
-- lightning: 2.2.1
-- monai: 1.3.0
-- [torch-em](https://github.com/constantinpape/torch-em): 0.6.1
-- timm: 0.4.12
-- mae: please refer [here](https://github.com/facebookresearch/mae).
-- [lion-pytorch](https://github.com/lucidrains/lion-pytorch): 0.1.4
+- Create a conda environment
+```bash
+conda create -n mmvlab_lmc python=3.9
+conda activate mmvlab_lmc
+```
+- Install pytorch:
+
+```bash
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+```
+If CUDA 11.8 doesn't work (`torch.cuda.is_available() == False`), please refer [here](https://download.pytorch.org/whl/torch/) to install torch that is suitable for your system.
+
+- Install package (editable):
+```bash
+cd mmvlab_lmc
+pip install -e .
+```
 
 ## How to use
 
 ### Data:
 Please follow the official guideline to download the datset.
 
+### Checkpoint:
+You can download the checkpoints from Zenodo.
+
+There are two types of checkpoints in terms of the training stragegy, namely training together (BF+DIC+PC -> organelle) and training separately (BF -> organelle, DIC -> organelle, PC -> organelle). 
+
+- trained together: TBA
+- trained separately: TBA
+
+Notably, for the final submission we applied the `mixed` strategy, where `actin` and `mitochondria` related checkpoints are trained-together version, while `nucleus` and `tubulin` related checkpoints are trained-separately version. The decision is based on the empirical experience in the test phase. Generally, the models should perform similar between these two types, which is illustrated in our paper's discussion.
 ### Pretrain:
 ```bash
 cd mae
@@ -33,11 +51,11 @@ cd ..
 take all 3 modalities to tubulin as an example:
 ```bash
 # assume the current directory is `lightmycells`
-python train_fabric_mae.py --log_dir exp/ --save_last --modality all --train_path data/train/tubulin --model_type vit_b --encoder_checkpoint mae/checkpoint-399.pth --batch_size 16 --lr 3e-4 --optimizer lion --scheduler CosineAnnealingWarmRestartsDecay --accumulation_step 1 --n_epochs 1000 --device 0 --precision "bf16-true"
+python train.py --log_dir exp/ --save_last --modality all --train_path data/train/tubulin --model_type vit_b --encoder_checkpoint mae/checkpoint-399.pth --batch_size 16 --lr 3e-4 --optimizer lion --scheduler CosineAnnealingWarmRestartsDecay --accumulation_step 1 --n_epochs 1000 --device 0 --precision "bf16-true"
 ```
 ### Test:
 ```bash
-python test_mae.py --test_path data/holdout/tubulin --save_path exp/pred --checkpoint_path exp/checkpoint/best.pth --modality all --device cuda:0
+python test.py --test_path data/holdout/tubulin --save_path exp/pred --checkpoint_path exp/checkpoint/best.pth --modality all --device cuda:0
 ```
 ### Evaluation:
 ```bash
