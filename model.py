@@ -5,15 +5,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# from torch.cuda.amp import autocast
-
 from torch_em.model.unet import Decoder, ConvBlock2d, Upsampler2d
 from torch_em.model.vit import get_vision_transformer, ViT_MAE, ViT_Sam
 
-try:
-    from micro_sam.util import get_sam_model
-except ImportError:
-    get_sam_model = None
+get_sam_model = None
 
 
 #
