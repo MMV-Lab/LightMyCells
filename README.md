@@ -30,12 +30,12 @@ pip install -e .
 Please follow the official guideline to download the datset.
 
 ### Checkpoint:
-You can download the checkpoints from Zenodo.
+You can download the checkpoints from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11124290.svg)](https://doi.org/10.5281/zenodo.11124290).
 
-There are two types of checkpoints in terms of the training stragegy, namely training together (BF+DIC+PC -> organelle) and training separately (BF -> organelle, DIC -> organelle, PC -> organelle). 
+There are two types of checkpoints in terms of the training stragegy, namely training together and training separately. 
 
-- trained together: TBA
-- trained separately: TBA
+- trained together: BF+DIC+PC -> organelle. totally 4 models
+- trained separately: BF -> organelle, DIC -> organelle, PC -> organelle. totally 11 models (no DIC -> actin data)
 
 Notably, for the final submission we applied the `mixed` strategy, where `actin` and `mitochondria` related checkpoints are trained-together version, while `nucleus` and `tubulin` related checkpoints are trained-separately version. The decision is based on the empirical experience in the test phase. Generally, the models should perform similar between these two types, which is illustrated in our paper's discussion.
 ### Pretrain:
