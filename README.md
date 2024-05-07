@@ -27,7 +27,15 @@ pip install -e .
 ## How to use
 
 ### Data:
-Please follow the official guideline to download the datset.
+```bash
+python data_retrieve.py --download
+```
+This command will download the whold dataset and automatically filter the data with number listed in `delete_list.csv`. The organized dataset is stored in `./data` folder with the image-gt pair formed (`_IM` and `_GT`). The train/holdout ratio is 0.95/0.05.
+
+If you already downloaded the dataset from the official website, just provide the dataset path:
+```bash
+python data_retrieve.py --raw_path your_data_path
+```
 
 ### Checkpoint:
 You can download the checkpoints from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11124290.svg)](https://doi.org/10.5281/zenodo.11124290).
