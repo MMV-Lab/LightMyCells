@@ -1,2 +1,5 @@
 **/*.egg-info/
 **/__pycache__/
+**/raw_data/
+**/data/
+**/exp/
